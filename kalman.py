@@ -10,7 +10,7 @@
 # by Andrew D. Straw
 #coding:utf-8
 import numpy
-import pylab
+import matplotlib.pyplot as plt
 
 #这里是假设A=1，H=1的情况
 
@@ -47,18 +47,18 @@ for k in range(1,n_iter):
     xhat[k] = xhatminus[k]+K[k]*(z[k]-xhatminus[k]) #X(k|k) = X(k|k-1) + Kg(k)[Z(k) - HX(k|k-1)], H=1
     P[k] = (1-K[k])*Pminus[k] #P(k|k) = (1 - Kg(k)H)P(k|k-1), H=1
 
-pylab.figure()
-pylab.plot(z,'k+',label='noisy measurements')     #测量值
-pylab.plot(xhat,'b-',label='a posteri estimate')  #过滤后的值
-pylab.axhline(x,color='g',label='truth value')    #系统值
-pylab.legend()
-pylab.xlabel('Iteration')
-pylab.ylabel('Voltage')
+plt.figure()
+plt.plot(z,'k+',label='noisy measurements')     #测量值
+plt.plot(xhat,'b-',label='a posteri estimate')  #过滤后的值
+plt.axhline(x,color='g',label='truth value')    #系统值
+plt.legend()
+plt.xlabel('Iteration')
+plt.ylabel('Voltage')
 
-pylab.figure()
+plt.figure()
 valid_iter = range(1,n_iter) # Pminus not valid at step 0
-pylab.plot(valid_iter,Pminus[valid_iter],label='a priori error estimate')
-pylab.xlabel('Iteration')
-pylab.ylabel('$(Voltage)^2$')
-pylab.setp(pylab.gca(),'ylim',[0,.01])
-pylab.show()
+plt.plot(valid_iter,Pminus[valid_iter],label='a priori error estimate')
+plt.xlabel('Iteration')
+plt.ylabel('$(Voltage)^2$')
+plt.setp(plt.gca(),'ylim',[0,.01])
+plt.show()
