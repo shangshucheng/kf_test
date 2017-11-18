@@ -20,7 +20,7 @@ sz = (n_iter,) # size of array
 x = 0.0 # truth value (typo in example at top of p. 13 calls this z)
 z = numpy.random.normal(x,0.1,size=sz) # observations (normal about x, sigma=0.1)
 print z
-a = input('just test')
+#a = input('just test')
 
 Q = 1e-5 # process variance
 
