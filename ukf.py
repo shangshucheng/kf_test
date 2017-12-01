@@ -3,8 +3,7 @@ from filterpy.kalman import UnscentedKalmanFilter as UKF
 from filterpy.common import Q_discrete_white_noise
 from numpy.random import randn
 import numpy as np
-
-
+import matplotlib.pyplot as plt
 def f_cv(x, dt):
     """ state transition function for a 
     constant velocity aircraft"""
@@ -17,11 +16,11 @@ def f_cv(x, dt):
 
 def h_cv(x):
     return np.array([x[0], x[2]])
-
-dt=1.0
-
+std_x, std_y = .3, .3
+#xs, ps= kf.batch_filter(zs)
+dt = 1.0
 zs = [np.array([i + randn()*std_x, 
-                i + randn()*std_y]) for i in range(100)] 
+                i + randn()*std_y]) for i in range(100)]  
 
 
 sigmas = MerweScaledSigmaPoints(4, alpha=.1, beta=2., kappa=1.)
@@ -40,4 +39,4 @@ for z in zs:
 uxs = np.array(uxs)
 
 plt.plot(uxs[:, 0], uxs[:, 2])
-print('UKF standard deviation {:.3f} meters'.format(np.std(uxs - xs)))
+#print('UKF standard deviation {:.3f} meters'.format(np.std(uxs - xs)))
